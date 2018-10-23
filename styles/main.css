@@ -1,3 +1,45 @@
 body {
   background-color: lightsteelblue;
-}
+ }
+
+.page-container {
+    margin: 1%;
+  }
+  
+  .pcard {
+    border-radius: 15px;
+  }
+  
+  .pcard:hover {
+    background-color: lightgrey;
+  }
+  
+  .board-card {
+    /* border: 2px solid gray; */
+    max-width: 20%;
+  }
+  
+  .card-img-top {
+    border-radius: 15px;
+  }
+  
+  .pin-card {
+    max-width: 14%;
+    position: relative;
+  }
+  
+  .pin-card a {
+    position: absolute;
+    left: 0; bottom: 10px;
+    width: 100%;
+    text-align: center;
+    display: none;
+    color: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* text-decoration: none; */
+  }
+  
+  .pin-card:hover a {
+    display: block;
+  }
