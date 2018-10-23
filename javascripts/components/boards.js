@@ -1,23 +1,26 @@
 import { loadBoards } from "../data/boardsData.js";
+import { initializePinView } from "./pins.js";
+import { loadPinsOnBoards } from "../data/pinsData.js";
 
 const bindEvents = () => {
     $('#user-boards').on('click', '.board-card', (e) => {
         const clickedBoardId = $(e.target).closest('.board-card').attr('id');
         $('#boards-page').hide();
         $('#pins-page').show();
-        console.log(clickedBoardId);
+        initializePinView(clickedBoardId);
     })
 }
 
 const writeBoards = (boards) => {
     let domString = '';
     boards.forEach(board => {
+        const boardImg = board.pins[0] ? board.pins[0].image_url : './db/default-img.jpeg';
         domString += `
             <div id="${board.id}" class="board-card p-2">
-                <img class="card-img-top" src="./db/default-img.jpeg" alt="Card image cap">
+                <img class="card-img-top" src="${boardImg}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">${board.name}</h5>
-                    <p class="card-text">42 Pins</p>
+                    <p class="card-text">${board.pins.length} Pins</p>
                 </div>
             </div>
             `
@@ -27,10 +30,12 @@ const writeBoards = (boards) => {
 
 const initializeBoardView = () => {
     loadBoards().then((boards) => {
-        // console.log('inside the .then')
-        writeBoards(boards);
+        return loadPinsOnBoards(boards);
+    }) .then((boardsWithPins) => {
+        console.log(boardsWithPins)
+        writeBoards(boardsWithPins);
         bindEvents();
-    }).catch((error) => {
+    }) .catch((error) => {
         console.error(error);
     })
 }
