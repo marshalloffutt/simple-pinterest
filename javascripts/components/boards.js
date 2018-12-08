@@ -32,7 +32,6 @@ const initializeBoardView = () => {
     loadBoards().then((boards) => {
         return loadPinsOnBoards(boards);
     }) .then((boardsWithPins) => {
-        console.log(boardsWithPins)
         writeBoards(boardsWithPins);
         bindEvents();
     }) .catch((error) => {
