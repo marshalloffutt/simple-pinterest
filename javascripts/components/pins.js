@@ -34,7 +34,7 @@ const initializePinView = (boardId) => {
         bindEvents();
     })
     .catch(error => {
-        console.error('you fucked up marshall', error);
+        console.error('you fucked up the pins marshall', error);
     });
 }
 
